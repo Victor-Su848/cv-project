@@ -1,0 +1,13 @@
+form {
+    border:1px solid red;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 25px;
+    
+}
+
+.form-section {
+    border-bottom: 1px solid var(--eerie-black);
+    padding: 50px
+}
