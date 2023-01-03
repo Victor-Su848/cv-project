@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import CV from "./CV";
+import uniqid from "uniqid";
+import { type } from "@testing-library/user-event/dist/type";
 
 class Form extends Component {
   constructor(props) {
@@ -13,18 +15,20 @@ class Form extends Component {
         phoneNum: "",
         email: "",
       },
-      educationArr: [this.makeEducationGroup],
+      educationArr: [this.makeEducationGroup(), this.makeEducationGroup()],
     };
 
     this.handlePersonalInfoChange = this.handlePersonalInfoChange.bind(this);
+    this.handleEducationChange = this.handleEducationChange.bind(this);
     this.addName = this.addName.bind(this);
     this.makeEducationGroup = this.makeEducationGroup.bind(this);
+    this.addToEducationArr = this.addToEducationArr.bind(this);
   }
 
   // handles a change in the personal info section
   handlePersonalInfoChange(event) {
-    console.log(this.state.personalInfo);
-    let value = event.target.value;
+    console.log("handlePersonalInfoChange called.");
+    let value = event.target.value; // asign value in input to variable
 
     // set the new value by taking the previous state as a constructor.
     // set the personalInfo object to be the previous state's personalInfo,
@@ -33,19 +37,39 @@ class Form extends Component {
     this.setState(prevState => ({
       personalInfo: { ...prevState.personalInfo,  [event.target.name]: value }
     }))
+    console.log(this.state.personalInfo); // print personalInfo object
+  }
 
-    console.log(this.state.personalInfo);
+  // handles a change in an education group
+  handleEducationChange(event) {
+    console.log("handleEducationChange called.");
+    let value = event.target.value;
+    let eventName = event.target.name;
+    
+    let indexChar = event.target.id.slice(-1);
+    let indexNum = parseInt(indexChar);
+    
+
+    let tempArr = this.state.educationArr;
+    tempArr[indexNum][eventName] = value;
+    
+    this.setState({
+      educationArr: tempArr
+    })
+    console.log(this.state.educationArr);
   }
   
   addName(event) {
-    console.log("Add name button clicked");
+    console.log("addName called.");
     this.setState({
       count: this.state.count + 1,
     });
   }
 
+  // create and return an education group object
   makeEducationGroup() {
-    let obj = {
+    console.log("makeEducationGroup called.");
+    let obj = { // create object
       name: "",
       from: "",
       to: "",
@@ -53,8 +77,19 @@ class Form extends Component {
       major: "",
       city: "",
       state: "",
+      id: uniqid()
     };
     return obj;
+  }
+
+  // add an education group object to educationArr
+  addToEducationArr() {
+    console.log("addToEducationArr called.")
+    let obj = this.makeEducationGroup(); // create object using helper function
+
+    this.setState(prevState => ({ // add the new object to educationArr
+      educationArr: [...prevState.educationArr, obj]
+  }));
   }
 
   render() {
@@ -94,33 +129,37 @@ class Form extends Component {
 
           {/**Start of education rendering */}
           <div className="form-section">
-            {[...Array(this.state.count)].map((e, i) => {
+            {this.state.educationArr.map((e, i) => {
               return (
-                <div className="form-group">
+                
+                <div key={e.id} className="form-group">
                   <div className="form-row single">
                     <div className="form-input">
                       <label htmlFor={"school-name-" + i}>School Name</label>
                       <input
+                        onChange={this.handleEducationChange}
                         type="text"
-                        name={"school-name-" + i}
+                        name="name"
                         id={"school-name-" + i}
                       ></input>
                     </div>
                   </div>
                   <div className="form-row pair">
                     <div className="form-input">
-                      <label htmlFor={"school-From-" + i}>From</label>
+                      <label htmlFor={"school-name-" + i}>From</label>
                       <input
+                        onChange={this.handleEducationChange}
                         type="text"
-                        name={"school-From-" + i}
+                        name="from"
                         id={"school-name-" + i}
                       ></input>
                     </div>
                     <div className="form-input">
                       <label htmlFor={"school-To-" + i}>To</label>
                       <input
+                        onChange={this.handleEducationChange}
                         type="text"
-                        name={"school-To-" + i}
+                        name="to"
                         id={"school-To-" + i}
                       ></input>
                     </div>
@@ -129,16 +168,18 @@ class Form extends Component {
                     <div className="form-input">
                       <label htmlFor={"school-degree-" + i}>Degree</label>
                       <input
+                        onChange={this.handleEducationChange}
                         type="text"
-                        name={"school-degree-" + i}
+                        name="degree"
                         id={"school-degree-" + i}
                       ></input>
                     </div>
                     <div className="form-input">
                       <label htmlFor={"school-major-" + i}>Major</label>
                       <input
+                        onChange={this.handleEducationChange}
                         type="text"
-                        name={"school-major-" + i}
+                        name="major"
                         id={"school-major-" + i}
                       ></input>
                     </div>
@@ -147,16 +188,18 @@ class Form extends Component {
                     <div className="form-input">
                       <label htmlFor={"school-city-" + i}>City</label>
                       <input
+                        onChange={this.handleEducationChange}
                         type="text"
-                        name={"school-city-" + i}
+                        name="city"
                         id={"school-city-" + i}
                       ></input>
                     </div>
                     <div className="form-input">
                       <label htmlFor={"school-state-" + i}>State</label>
                       <input
+                        onChange={this.handleEducationChange}
                         type="text"
-                        name={"school-state-" + i}
+                        name="state"
                         id={"school-state-" + i}
                       ></input>
                     </div>
@@ -176,7 +219,7 @@ class Form extends Component {
             <button
               className="add-remove-btn"
               type="button"
-              onClick={this.addName}
+              onClick={this.addToEducationArr}
             >
               Add
             </button>
