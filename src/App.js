@@ -1,7 +1,6 @@
-import { render } from '@testing-library/react';
-import React, { Component } from 'react';
-import Form from './components/Form';
-import CV from './components/CV';
+import { render } from "@testing-library/react";
+import React, { Component } from "react";
+import Form from "./components/Form";
 
 class App extends Component {
   constructor(props) {
@@ -9,11 +8,7 @@ class App extends Component {
   }
 
   render() {
-    return (
-      <div>
-        <Form></Form>
-      </div>
-    );
+    return <Form></Form>;
   }
 }
 
