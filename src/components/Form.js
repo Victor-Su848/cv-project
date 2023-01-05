@@ -20,6 +20,7 @@ class Form extends Component {
 
     this.handlePersonalInfoChange = this.handlePersonalInfoChange.bind(this);
     this.handleEducationChange = this.handleEducationChange.bind(this);
+    this.removeEducationGroup = this.removeEducationGroup.bind(this);
     this.addName = this.addName.bind(this);
     this.makeEducationGroup = this.makeEducationGroup.bind(this);
     this.addToEducationArr = this.addToEducationArr.bind(this);
@@ -34,9 +35,9 @@ class Form extends Component {
     // set the personalInfo object to be the previous state's personalInfo,
     // in addition to the new value, event.target.name refers to the name
     // property of the input
-    this.setState(prevState => ({
-      personalInfo: { ...prevState.personalInfo,  [event.target.name]: value }
-    }))
+    this.setState((prevState) => ({
+      personalInfo: { ...prevState.personalInfo, [event.target.name]: value },
+    }));
     console.log(this.state.personalInfo); // print personalInfo object
   }
 
@@ -45,20 +46,33 @@ class Form extends Component {
     console.log("handleEducationChange called.");
     let value = event.target.value;
     let eventName = event.target.name;
-    
+
     let indexChar = event.target.id.slice(-1);
     let indexNum = parseInt(indexChar);
-    
 
     let tempArr = this.state.educationArr;
     tempArr[indexNum][eventName] = value;
-    
+
     this.setState({
-      educationArr: tempArr
-    })
+      educationArr: tempArr,
+    });
     console.log(this.state.educationArr);
   }
-  
+
+  // removes an education group from educationArr
+  removeEducationGroup(event) {
+    let indexChar = event.target.id.slice(-1);
+    let indexNum = parseInt(indexChar);
+
+    let tempArr = this.state.educationArr;
+    tempArr.splice(indexNum, 1);
+    console.log(tempArr);
+
+    this.setState({
+      educationArr: tempArr,
+    })
+  }
+
   addName(event) {
     console.log("addName called.");
     this.setState({
@@ -69,27 +83,29 @@ class Form extends Component {
   // create and return an education group object
   makeEducationGroup() {
     console.log("makeEducationGroup called.");
-    let obj = { // create object
+    let obj = {
+      // create object
       name: "",
       from: "",
       to: "",
-      degree : "",
+      degree: "",
       major: "",
       city: "",
       state: "",
-      id: uniqid()
+      id: uniqid(),
     };
     return obj;
   }
 
   // add an education group object to educationArr
   addToEducationArr() {
-    console.log("addToEducationArr called.")
+    console.log("addToEducationArr called.");
     let obj = this.makeEducationGroup(); // create object using helper function
 
-    this.setState(prevState => ({ // add the new object to educationArr
-      educationArr: [...prevState.educationArr, obj]
-  }));
+    this.setState((prevState) => ({
+      // add the new object to educationArr
+      educationArr: [...prevState.educationArr, obj],
+    }));
   }
 
   render() {
@@ -102,11 +118,21 @@ class Form extends Component {
               <div className="form-row pair">
                 <div className="form-input">
                   <label htmlFor="firstName">First Name</label>
-                  <input onChange={this.handlePersonalInfoChange} type="text" name="firstName" id="first-name"></input>
+                  <input
+                    onChange={this.handlePersonalInfoChange}
+                    type="text"
+                    name="firstName"
+                    id="first-name"
+                  ></input>
                 </div>
                 <div className="form-input">
                   <label htmlFor="last-name">Last Name</label>
-                  <input onChange={this.handlePersonalInfoChange} type="text" name="lastName" id="last-name"></input>
+                  <input
+                    onChange={this.handlePersonalInfoChange}
+                    type="text"
+                    name="lastName"
+                    id="last-name"
+                  ></input>
                 </div>
               </div>
               <div className="form-row pair">
@@ -121,7 +147,12 @@ class Form extends Component {
                 </div>
                 <div className="form-input">
                   <label htmlFor="email">Email</label>
-                  <input onChange={this.handlePersonalInfoChange} type="email" name="email" id="email"></input>
+                  <input
+                    onChange={this.handlePersonalInfoChange}
+                    type="email"
+                    name="email"
+                    id="email"
+                  ></input>
                 </div>
               </div>
             </div>
@@ -131,7 +162,6 @@ class Form extends Component {
           <div className="form-section">
             {this.state.educationArr.map((e, i) => {
               return (
-                
                 <div key={e.id} className="form-group">
                   <div className="form-row single">
                     <div className="form-input">
@@ -205,11 +235,7 @@ class Form extends Component {
                     </div>
                   </div>
                   <div className="form-row">
-                    <button
-                      className="add-remove-btn"
-                      type="button"
-                      
-                    >
+                    <button onClick={this.removeEducationGroup} id={"remove-btn-" + i} className="add-remove-btn" type="button">
                       Remove
                     </button>
                   </div>
@@ -225,7 +251,7 @@ class Form extends Component {
             </button>
           </div>
         </form>
-        <CV></CV>
+        <CV personalInfo={this.state.personalInfo} educationArr={this.state.educationArr} />
       </main>
     );
   }
