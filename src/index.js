@@ -4,6 +4,7 @@ import App from './App';
 import './styles/reset.css';
 import './styles/body.css';
 import './styles/form.css';
+import './styles/CV.css';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(

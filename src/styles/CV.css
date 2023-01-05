@@ -1,0 +1,52 @@
+.cv {
+  border-radius: 3px;
+  background-color: whitesmoke;
+  padding: 20px;
+  width: 700px;
+  font-family: 'Times New Roman', Times, serif;
+  box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.75);
+  -webkit-box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.75);
+}
+.cv-row {
+    display: flex;
+    justify-content: space-between;
+    line-height: 1.25rem;
+}
+.cv-row h3, .from-to {
+    font-weight: 600;
+    font-size: 1.125rem;
+}
+.italicize {
+    font-style: italic;
+}
+
+/*start of personal info section*/
+.personal-info {
+    padding-bottom: 10px;
+    border-bottom: 1px solid black;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.personal-info h1 {
+    font-size: 2rem;
+}
+.personal-info h2 {
+    font-size: 1rem;
+}
+.personal-info h2 a {
+    text-decoration: none;
+    color:rgba(0, 0, 0, 0.75)
+}
+/*end of personal info section*/
+/*start of education section*/
+.education-section {
+    padding: 10px 0;
+    border-bottom: 1px solid black;
+}
+.education {
+    margin-bottom: 10px;
+}
+/*end of education section*/

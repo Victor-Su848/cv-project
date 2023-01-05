@@ -10,12 +10,33 @@ class Form extends Component {
     this.state = {
       count: 1,
       personalInfo: {
-        firstName: "",
-        lastName: "",
-        phoneNum: "",
-        email: "",
+        firstName: "Victor",
+        lastName: "Su",
+        phoneNum: "848-242-0701",
+        email: "victor.su848@gmail.com",
       },
-      educationArr: [this.makeEducationGroup(), this.makeEducationGroup()],
+      educationArr: [
+        {
+          name: "University of California: Los Angelos",
+          from: "2024",
+          to: "2026",
+          degree: "Bachelors of Science",
+          major: "Computer Science",
+          city: "Los Angelos",
+          state: "California",
+          id: uniqid(),
+        },
+        {
+          name: "University of Maryland",
+          from: "2022",
+          to: "2024",
+          degree: "Bachelors of Science",
+          major: "Computer Science",
+          city: "College Park",
+          state: "Maryland",
+          id: uniqid(),
+        },
+      ],
     };
 
     this.handlePersonalInfoChange = this.handlePersonalInfoChange.bind(this);

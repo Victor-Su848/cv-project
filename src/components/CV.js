@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import PersonalInfo from "./PersonalInfo";
+import Education from "./Education";
 
 class CV extends Component {
   constructor(props) {
@@ -10,9 +11,9 @@ class CV extends Component {
 
   render() {
     return (
-      <div>
-        <p>THIS IS THE CV {this.props.personalInfo.firstName}</p>
+      <div className="cv">
         <PersonalInfo personalInfo={this.props.personalInfo}></PersonalInfo>
+        <Education educationArr={this.props.educationArr}></Education>
       </div>
     );
   }

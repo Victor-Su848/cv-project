@@ -5,14 +5,19 @@ class PersonalInfo extends Component {
     super(props);
   }
 
+  logPersonalInfo() {
+    console.log(this.props.personalInfo);
+  }
+
   render() {
     return (
-      <div>
-        <p>THIS IS THE CV</p>
-        <h1>Victor Su</h1>
+      <div className="personal-info">
+        <h1>{this.props.personalInfo.firstName} {this.props.personalInfo.lastName}</h1>
+        <h2><a href={"tel:" + this.props.personalInfo.phoneNum}>{this.props.personalInfo.phoneNum}</a> <a href={"mailto:" + this.props.personalInfo.email}>{this.props.personalInfo.email}</a></h2>
       </div>
     );
   }
 }
+
 
 export default PersonalInfo;
