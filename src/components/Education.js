@@ -8,9 +8,11 @@ class Education extends Component {
   render() {
     return (
       <div className="education-section">
+        <h1>Education</h1>
         {this.props.educationArr.map((e, i) => {
           return (
-          <div className="education">
+          <div key={e.id} className="education">
+            
             <div className="cv-row">
                 <h3>{e.name}</h3>
                 <p className="from-to">{e.from + " - " + e.to}</p>
