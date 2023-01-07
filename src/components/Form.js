@@ -10,43 +10,67 @@ class Form extends Component {
     this.state = {
       personalInfo: {
         // holds personal information
-        firstName: "Victor",
-        lastName: "Su",
-        phoneNum: "848-242-0701",
-        email: "victor.su848@gmail.com",
+        firstName: "John",
+        lastName: "Doe",
+        phoneNum: "123-456-7890",
+        email: "john.doe123@gmail.com",
       },
       educationArr: [
         // holds education objects
         {
-          name: "University of California: Los Angelos",
-          from: "2024",
-          to: "2026",
+          name: "Example School 2",
+          from: "2025",
+          to: "2023",
           degree: "Bachelors of Science",
           major: "Computer Science",
-          city: "Los Angelos",
-          state: "California",
+          city: "City 2",
+          state: "State 2",
           id: uniqid(),
         },
         {
-          name: "University of Maryland",
+          name: "Example School 1",
           from: "2022",
-          to: "2024",
+          to: "2023",
           degree: "Bachelors of Science",
           major: "Computer Science",
-          city: "College Park",
-          state: "Maryland",
+          city: "City 1",
+          state: "State 1",
           id: uniqid(),
         },
       ],
       experienceArr: [
         // holds experience objects
         {
-          name: "Research Assistant",
-          position: "Frontend Web Developer",
-          from: "2022",
-          to: "Current",
+          name: "Company 3",
+          position: "Software Engineering Intern (:",
+          from: "May 2023",
+          to: "July 2023",
+          city: "City 3",
+          state: "State 3",
           tasks:
-            "Redesigned website. Used ESLint. Used Figma to redesign. Here's the link.",
+            "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec rhoncus mattis massa, in pretium mi hendrerit ut. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Mauris iaculis tellus et libero congue dapibus. Curabitur id enim at tortor mattis ultrices vel id ipsum.",
+          id: uniqid(),
+        },
+        {
+          name: "Company 2",
+          position: "Employee",
+          from: "June 2022",
+          to: "Jan 2023",
+          city: "City 2",
+          state: "State 2",
+          tasks:
+            "Cras sit amet facilisis dolor, sit amet suscipit metus. Integer libero magna, tincidunt eu pretium sed, rhoncus at mauris. Donec nec maximus libero. Maecenas pellentesque quis arcu id facilisis. Curabitur porta lorem odio, sed posuere neque ullamcorper in. Vivamus malesuada volutpat tellus sit amet egestas. Pellentesque porttitor gravida dictum. Integer sed neque vulputate sapien laoreet placerat venenatis eget purus. Praesent fringilla cursus enim at gravida. Etiam vel tempus neque, vitae molestie quam. Aliquam felis nisi, fringilla eget odio ac, ornare dignissim diam.",
+          id: uniqid(),
+        },
+        {
+          name: "Company 1",
+          position: "Worker",
+          from: "Feb 2021",
+          to: "June 2022",
+          city: "City 1",
+          state: "State 1",
+          tasks:
+            "Pellentesque in eros non elit porttitor fringilla vitae eu massa. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Donec a pharetra quam. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus sit amet volutpat ligula. Cras leo justo, pharetra eget elit eget, aliquam convallis ex. Vivamus malesuada volutpat tellus sit amet egestas. Pellentesque porttitor gravida dictum. Integer sed neque vulputate sapien laoreet placerat venenatis eget purus. Praesent fringilla cursus enim at gravida.",
           id: uniqid(),
         },
       ],
@@ -204,6 +228,7 @@ class Form extends Component {
     return (
       <main>
         <form>
+          <h1>Personal Information</h1>
           {/**Start of general information rendering */}
           <div className="form-section">
             <div className="form-group">
@@ -255,6 +280,7 @@ class Form extends Component {
           </div>
 
           {/**Start of education rendering */}
+          <h1>Education</h1>
           <div className="form-section">
             {this.state.educationArr.map((e, i) => {
               return (
@@ -359,13 +385,13 @@ class Form extends Component {
             </button>
           </div>
 
-
+          <h1>Experience</h1>
           {/**Start of experience rendering */}
           <div className="form-section">
             {this.state.experienceArr.map((e, i) => {
               return (
                 <div key={e.id} className="form-group">
-                  <div className="form-row single">
+                  <div className="form-row pair">
                     <div className="form-input">
                       <label htmlFor={"company-name-" + i}>Company</label>
                       <input
@@ -376,31 +402,63 @@ class Form extends Component {
                         value={e.name}
                       ></input>
                     </div>
+                    <div className="form-input">
+                      <label htmlFor={"company-To-" + i}>Position</label>
+                      <input
+                        onChange={this.handleExperienceChange}
+                        type="text"
+                        name="position"
+                        id={"company-position-" + i}
+                        value={e.position}
+                      ></input>
+                    </div>
                   </div>
                   <div className="form-row pair">
                     <div className="form-input">
-                      <label htmlFor={"company-name-" + i}>From</label>
+                      <label htmlFor={"company-from-" + i}>From</label>
                       <input
                         onChange={this.handleExperienceChange}
                         type="text"
                         name="from"
-                        id={"company-name-" + i}
+                        id={"company-from-" + i}
                         value={e.from}
                       ></input>
                     </div>
                     <div className="form-input">
-                      <label htmlFor={"company-To-" + i}>To</label>
+                      <label htmlFor={"company-to-" + i}>To</label>
                       <input
                         onChange={this.handleExperienceChange}
                         type="text"
                         name="to"
-                        id={"company-To-" + i}
+                        id={"company-to-" + i}
                         value={e.to}
                       ></input>
                     </div>
                   </div>
-                  <div className="form-row">
-                    <div className="form-input tasks">
+                  <div className="form-row pair">
+                    <div className="form-input">
+                      <label htmlFor={"experience-city-" + i}>City</label>
+                      <input
+                        onChange={this.handleExperienceChange}
+                        type="text"
+                        name="city"
+                        id={"experience-city-" + i}
+                        value={e.city}
+                      ></input>
+                    </div>
+                    <div className="form-input">
+                      <label htmlFor={"experience-state-" + i}>State</label>
+                      <input
+                        onChange={this.handleExperienceChange}
+                        type="text"
+                        name="state"
+                        id={"experience-state-" + i}
+                        value={e.state}
+                      ></input>
+                    </div>
+                  </div>
+                  <div className="form-row single">
+                    <div className="form-input">
                       <label htmlFor={"company-tasks-" + i}>Tasks</label>
                       <input
                         onChange={this.handleExperienceChange}
@@ -428,7 +486,7 @@ class Form extends Component {
             <button
               className="add-remove-btn"
               type="button"
-              onClick={this.addToEducationArr}
+              onClick={this.addToExperienceArr}
             >
               Add
             </button>
@@ -437,6 +495,7 @@ class Form extends Component {
         <CV
           personalInfo={this.state.personalInfo}
           educationArr={this.state.educationArr}
+          experienceArr={this.state.experienceArr}
         />
       </main>
     );

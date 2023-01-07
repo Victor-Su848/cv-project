@@ -2,7 +2,8 @@
   border-radius: 3px;
   background-color: whitesmoke;
   padding: 20px;
-  width: 700px;
+  width: 595px;
+  height: 770px;
   font-family: 'Times New Roman', Times, serif;
   box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.75);
   -webkit-box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.75);
@@ -42,16 +43,23 @@
 }
 /*end of personal info section*/
 /*start of education section*/
-.education-section {
+.education-section, .experience-section {
     padding: 10px 0;
+}
+.education-section {
     border-bottom: 1px solid black;
 }
-.education-section h1 {
+.education-section h1, .experience-section h1 {
     font-weight: 600;
-    font-size: 1.125rem;
+    font-size: 1.25rem;
     margin-bottom: 10px;
 }
-.education {
+.education, .experience {
     margin-bottom: 10px;
 }
 /*end of education section*/
+/*start of experience section*/
+.tasks {
+    margin-top: 10px;
+}
+/*end of experience section*/

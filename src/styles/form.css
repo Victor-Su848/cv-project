@@ -2,14 +2,18 @@ form {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  margin-right: 25px;
   padding: 25px;
-  margin: 25px;
   background-color: var(--anti-flash-white);
   border-radius: 5px;
 
   box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.75);
   -webkit-box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.75);
   -moz-box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.75);
+}
+form h1 {
+  font-weight: 500;
+  font-size: 1.25rem;
 }
 
 .form-section {
@@ -45,7 +49,7 @@ form {
     padding: 3px;
     border: none;
     border-radius: 3px;
-    
+    margin-top: 3px;
 }
 .add-remove-btn {
     width: 100%;
@@ -55,4 +59,7 @@ form {
     border: none;
     border-radius: 3px;
     font-weight: 600;
+}
+button:hover {
+  cursor: pointer;
 }
