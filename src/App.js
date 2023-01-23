@@ -1,11 +1,12 @@
 import React, { Component } from "react";
-import Form from "./components/Form";
+import Formm from "./components/Form";
+
 
 class App extends Component {
   
 
   render() {
-    return <Form></Form>;
+    return <Formm></Formm>;
   }
 }
 

@@ -1,7 +1,448 @@
-import React, { Component } from "react";
+import React, { Component, useEffect, useState } from "react";
 import CV from "./CV";
 import uniqid from "uniqid";
+
 import { type } from "@testing-library/user-event/dist/type";
+
+function Formm() {
+  let [personalInfo, setPersonalInfo] = useState({
+    // holds personal information
+    firstName: "John",
+    lastName: "Doe",
+    phoneNum: "123-456-7890",
+    email: "john.doe123@gmail.com",
+  });
+  // handles a change in the personal info section
+  function handlePersonalInfoChange(event) {
+    console.log("handlePersonalInfoChange called.");
+    let value = event.target.value; // asign value in input to variable
+    let name = event.target.name;
+
+    let newObject = {...personalInfo};
+    newObject[name] = value;
+    setPersonalInfo(newObject);
+    console.log(personalInfo); // print personalInfo object
+  }
+
+  let [educationArr, setEducationArr] = useState([
+    // holds experience objects
+    {
+      name: "Example School 2",
+      from: "2025",
+      to: "2023",
+      degree: "Bachelors of Science",
+      major: "Computer Science",
+      city: "City 2",
+      state: "State 2",
+      id: uniqid(),
+    },
+    {
+      name: "Example School 1",
+      from: "2022",
+      to: "2023",
+      degree: "Bachelors of Science",
+      major: "Computer Science",
+      city: "City 1",
+      state: "State 1",
+      id: uniqid(),
+    },
+  ]);
+  function handleEducationChange(event) {
+    console.log("handleEducationChange called.");
+    let value = event.target.value;
+    let eventName = event.target.name;
+
+    let indexChar = event.target.id.slice(-1);
+    let indexNum = parseInt(indexChar);
+
+    let tempArr = [...educationArr];
+    tempArr[indexNum][eventName] = value;
+
+    setEducationArr(tempArr);
+
+    console.log(educationArr);
+  }
+  function removeEducationGroup(event) {
+    let indexChar = event.target.id.slice(-1);
+    let indexNum = parseInt(indexChar);
+
+    let tempArr = [...educationArr];
+    tempArr.splice(indexNum, 1);
+    console.log(tempArr);
+
+    setEducationArr(tempArr);
+  }
+  // create and return an education group object
+  function makeEducationGroup() {
+    console.log("makeEducationGroup called.");
+    let obj = {
+      // create object
+      name: "",
+      from: "",
+      to: "",
+      degree: "",
+      major: "",
+      city: "",
+      state: "",
+      id: uniqid(),
+    };
+
+    let tempArr = [...educationArr];
+    tempArr.push(obj);
+    setEducationArr(tempArr);
+    console.log(educationArr);
+  }
+  
+
+  let [experienceArr, setExperienceArr] = useState([
+    // holds experience objects
+    {
+      name: "Company 3",
+      position: "Software Engineering Intern (:",
+      from: "May 2023",
+      to: "July 2023",
+      city: "City 3",
+      state: "State 3",
+      tasks:
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec rhoncus mattis massa, in pretium mi hendrerit ut. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Mauris iaculis tellus et libero congue dapibus. Curabitur id enim at tortor mattis ultrices vel id ipsum.",
+      id: uniqid(),
+    },
+    {
+      name: "Company 2",
+      position: "Employee",
+      from: "June 2022",
+      to: "Jan 2023",
+      city: "City 2",
+      state: "State 2",
+      tasks:
+        "Cras sit amet facilisis dolor, sit amet suscipit metus. Integer libero magna, tincidunt eu pretium sed, rhoncus at mauris. Donec nec maximus libero. Maecenas pellentesque quis arcu id facilisis. Curabitur porta lorem odio, sed posuere neque ullamcorper in. Vivamus malesuada volutpat tellus sit amet egestas. Pellentesque porttitor gravida dictum. Integer sed neque vulputate sapien laoreet placerat venenatis eget purus. Praesent fringilla cursus enim at gravida. Etiam vel tempus neque, vitae molestie quam. Aliquam felis nisi, fringilla eget odio ac, ornare dignissim diam.",
+      id: uniqid(),
+    },
+    {
+      name: "Company 1",
+      position: "Worker",
+      from: "Feb 2021",
+      to: "June 2022",
+      city: "City 1",
+      state: "State 1",
+      tasks:
+        "Pellentesque in eros non elit porttitor fringilla vitae eu massa. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Donec a pharetra quam. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus sit amet volutpat ligula. Cras leo justo, pharetra eget elit eget, aliquam convallis ex. Vivamus malesuada volutpat tellus sit amet egestas. Pellentesque porttitor gravida dictum. Integer sed neque vulputate sapien laoreet placerat venenatis eget purus. Praesent fringilla cursus enim at gravida.",
+      id: uniqid(),
+    },
+  ]);
+  function handleExperienceChange(event) {
+    console.log("handleExperienceChange called.");
+    let value = event.target.value;
+    let eventName = event.target.name;
+
+    let indexChar = event.target.id.slice(-1);
+    let indexNum = parseInt(indexChar);
+
+    let tempArr = [...experienceArr];
+    tempArr[indexNum][eventName] = value;
+
+    setExperienceArr(tempArr);
+    console.log(experienceArr);
+  }
+  function addToExperienceArr() {
+    console.log("makeExperiengggceGroup called.");
+    let obj = {
+      // create object
+      name: "",
+      position: "",
+      from: "",
+      to: "",
+      tasks: "",
+      id: uniqid(),
+    };
+    let tempArr = [...experienceArr];
+    tempArr.push(obj);
+    setExperienceArr(tempArr);
+  }
+  function removeExperienceGroup(event) {
+    let indexChar = event.target.id.slice(-1);
+    let indexNum = parseInt(indexChar);
+
+    let tempArr = [...experienceArr];
+    tempArr.splice(indexNum, 1);
+    console.log(tempArr);
+
+    setExperienceArr(tempArr);
+  }
+
+  return (
+    <main>
+      <form>
+        {/**Start of general information rendering */}
+        <div className="form-section">
+          <div className="form-group">
+            <div className="form-row pair">
+              <div className="form-input">
+                <label htmlFor="firstName">First Name</label>
+                <input
+                  onChange={handlePersonalInfoChange}
+                  type="text"
+                  name="firstName"
+                  id="first-name"
+                  defaultValue={personalInfo.firstName}
+                ></input>
+              </div>
+              <div className="form-input">
+                <label htmlFor="last-name">Last Name</label>
+                <input
+                  onChange={handlePersonalInfoChange}
+                  type="text"
+                  name="lastName"
+                  id="last-name"
+                  defaultValue={personalInfo.lastName}
+                ></input>
+              </div>
+            </div>
+            <div className="form-row pair">
+              <div className="form-input">
+                <label htmlFor="phoneNum">Phone Number</label>
+                <input
+                  onChange={handlePersonalInfoChange}
+                  type="tel"
+                  name="phoneNum"
+                  id="phone-number"
+                  defaultValue={personalInfo.phoneNum}
+                ></input>
+              </div>
+              <div className="form-input">
+                <label htmlFor="email">Email</label>
+                <input
+                  onChange={handlePersonalInfoChange}
+                  type="email"
+                  name="email"
+                  id="email"
+                  defaultValue={personalInfo.email}
+                ></input>
+              </div>
+            </div>
+          </div>
+        </div>
+        {/**Start of education rendering */}
+        <h1>Education</h1>
+        <div className="form-section">
+          {educationArr.map((e, i) => {
+            return (
+              <div key={e.id} className="form-group">
+                <div className="form-row single">
+                  <div className="form-input">
+                    <label htmlFor={"school-name-" + i}>School Name</label>
+                    <input
+                      onChange={handleEducationChange}
+                      type="text"
+                      name="name"
+                      id={"school-name-" + i}
+                      defaultValue={e.name}
+                    ></input>
+                  </div>
+                </div>
+                <div className="form-row pair">
+                  <div className="form-input">
+                    <label htmlFor={"school-from-" + i}>From</label>
+                    <input
+                      onChange={handleEducationChange}
+                      type="text"
+                      name="from"
+                      id={"school-from-" + i}
+                      defaultValue={e.from}
+                    ></input>
+                  </div>
+                  <div className="form-input">
+                    <label htmlFor={"school-To-" + i}>To</label>
+                    <input
+                      onChange={handleEducationChange}
+                      type="text"
+                      name="to"
+                      id={"school-To-" + i}
+                      defaultValue={e.to}
+                    ></input>
+                  </div>
+                </div>
+                <div className="form-row pair">
+                  <div className="form-input">
+                    <label htmlFor={"school-degree-" + i}>Degree</label>
+                    <input
+                      onChange={handleEducationChange}
+                      type="text"
+                      name="degree"
+                      id={"school-degree-" + i}
+                      defaultValue={e.degree}
+                    ></input>
+                  </div>
+                  <div className="form-input">
+                    <label htmlFor={"school-major-" + i}>Major</label>
+                    <input
+                      onChange={handleEducationChange}
+                      type="text"
+                      name="major"
+                      id={"school-major-" + i}
+                      defaultValue={e.major}
+                    ></input>
+                  </div>
+                </div>
+                <div className="form-row pair">
+                  <div className="form-input">
+                    <label htmlFor={"school-city-" + i}>City</label>
+                    <input
+                      onChange={handleEducationChange}
+                      type="text"
+                      name="city"
+                      id={"school-city-" + i}
+                      defaultValue={e.city}
+                    ></input>
+                  </div>
+                  <div className="form-input">
+                    <label htmlFor={"school-state-" + i}>State</label>
+                    <input
+                      onChange={handleEducationChange}
+                      type="text"
+                      name="state"
+                      id={"school-state-" + i}
+                      defaultValue={e.state}
+                    ></input>
+                  </div>
+                </div>
+                <div className="form-row">
+                  <button
+                    onClick={removeEducationGroup}
+                    id={"remove-btn-" + i}
+                    className="add-remove-btn"
+                    type="button"
+                  >
+                    Remove
+                  </button>
+                </div>
+              </div>
+            );
+          })}
+          <button
+            className="add-remove-btn"
+            type="button"
+            onClick={makeEducationGroup}
+          >
+            Add
+          </button>
+        </div>
+        
+        {/**Start of experience rendering */}
+        <h1>Experience</h1>
+        <div className="form-section">
+          {experienceArr.map((e, i) => {
+            return (
+              <div key={e.id} className="form-group">
+                <div className="form-row pair">
+                  <div className="form-input">
+                    <label htmlFor={"company-name-" + i}>Company</label>
+                    <input
+                      onChange={handleExperienceChange}
+                      type="text"
+                      name="name"
+                      id={"company-name-" + i}
+                      defaultValue={e.name}
+                    ></input>
+                  </div>
+                  <div className="form-input">
+                    <label htmlFor={"company-To-" + i}>Position</label>
+                    <input
+                      onChange={handleExperienceChange}
+                      type="text"
+                      name="position"
+                      id={"company-position-" + i}
+                      defaultValue={e.position}
+                    ></input>
+                  </div>
+                </div>
+                <div className="form-row pair">
+                  <div className="form-input">
+                    <label htmlFor={"company-from-" + i}>From</label>
+                    <input
+                      onChange={handleExperienceChange}
+                      type="text"
+                      name="from"
+                      id={"company-from-" + i}
+                      defaultValue={e.from}
+                    ></input>
+                  </div>
+                  <div className="form-input">
+                    <label htmlFor={"company-to-" + i}>To</label>
+                    <input
+                      onChange={handleExperienceChange}
+                      type="text"
+                      name="to"
+                      id={"company-to-" + i}
+                      defaultValue={e.to}
+                    ></input>
+                  </div>
+                </div>
+                <div className="form-row pair">
+                  <div className="form-input">
+                    <label htmlFor={"experience-city-" + i}>City</label>
+                    <input
+                      onChange={handleExperienceChange}
+                      type="text"
+                      name="city"
+                      id={"experience-city-" + i}
+                      defaultValue={e.city}
+                    ></input>
+                  </div>
+                  <div className="form-input">
+                    <label htmlFor={"experience-state-" + i}>State</label>
+                    <input
+                      onChange={handleExperienceChange}
+                      type="text"
+                      name="state"
+                      id={"experience-state-" + i}
+                      defaultValue={e.state}
+                    ></input>
+                  </div>
+                </div>
+                <div className="form-row single">
+                  <div className="form-input">
+                    <label htmlFor={"company-tasks-" + i}>Tasks</label>
+                    <input
+                      onChange={handleExperienceChange}
+                      type="text"
+                      name="tasks"
+                      id={"company-tasks-" + i}
+                      defaultValue={e.tasks}
+                    ></input>
+                  </div>
+                </div>
+
+                <div className="form-row">
+                  <button
+                    onClick={removeExperienceGroup}
+                    id={"remove-btn-" + i}
+                    className="add-remove-btn"
+                    type="button"
+                  >
+                    Remove
+                  </button>
+                </div>
+              </div>
+            );
+          })}
+          <button
+            className="add-remove-btn"
+            type="button"
+            onClick={addToExperienceArr}
+          >
+            Add
+          </button>
+        </div>
+      </form>
+      <CV
+          personalInfo={personalInfo}
+          educationArr={educationArr}
+          experienceArr={experienceArr}
+        />
+    </main>
+  );
+}
 
 class Form extends Component {
   constructor(props) {
@@ -469,7 +910,7 @@ class Form extends Component {
                       ></input>
                     </div>
                   </div>
-                  
+
                   <div className="form-row">
                     <button
                       onClick={this.removeExperienceGroup}
@@ -502,4 +943,4 @@ class Form extends Component {
   }
 }
 
-export default Form;
+export default Formm;

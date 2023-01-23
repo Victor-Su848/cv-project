@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 
+/** 
 class PersonalInfo extends Component {
   constructor(props) {
     super(props);
@@ -17,6 +18,15 @@ class PersonalInfo extends Component {
       </div>
     );
   }
+}*/
+
+function PersonalInfo(props) {
+  return (
+    <div className="personal-info">
+      <h1>{props.personalInfo.firstName} {props.personalInfo.lastName}</h1>
+      <h2><a href={"tel:" + props.personalInfo.phoneNum}>{props.personalInfo.phoneNum}</a> <a href={"mailto:" + props.personalInfo.email}>{props.personalInfo.email}</a></h2>
+    </div>
+  );
 }
 
 

@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import PersonalInfo from "./PersonalInfo";
 import Education from "./Education";
 import Experience from "./Experience";
-
+/**
 class CV extends Component {
   constructor(props) {
     super(props);
@@ -19,6 +19,16 @@ class CV extends Component {
       </div>
     );
   }
+} */
+
+function CV(props) {
+  return (
+    <div className="cv">
+      <PersonalInfo personalInfo={props.personalInfo}></PersonalInfo>
+      <Education educationArr={props.educationArr}></Education>
+      <Experience experienceArr={props.experienceArr}></Experience>
+    </div>
+  );
 }
 
 export default CV;
